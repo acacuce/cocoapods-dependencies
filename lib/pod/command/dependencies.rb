@@ -188,7 +188,7 @@ module Pod
 
       # Returns a Set of Strings of the names of dependencies specified in the Podfile.
       def podfile_dependencies
-        Set.new(podfile.target_definitions.values.map { |t| t.dependencies.map { |d| d.name } }.flatten).reduce { |d| d.include? "/Tests" }
+        Set.new(podfile.target_definitions.values.map { |t| t.dependencies.map { |d| d.name } }.flatten).redject { |d| d.include? "/Tests" }
       end
 
       # Returns a [String: [String]] containing resolved mappings from the name of a pod to an array of the names of its dependencies.
